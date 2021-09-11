@@ -17,12 +17,12 @@ export default class RibbonMenu {
       ribbonInner.append(ribbonItem);
     }
     const arrowRight = createElement(`
-      <button class="ribbon__arrow ribbon__arrow_right">
+      <button class="ribbon__arrow ribbon__arrow_right ribbon__arrow_visible">
         <img src="/assets/images/icons/angle-icon.svg" alt="icon">
       </button>
     `);
     const arrowLeft = createElement(`
-      <button class="ribbon__arrow ribbon__arrow_left ribbon__arrow_visible">
+      <button class="ribbon__arrow ribbon__arrow_left">
         <img src="/assets/images/icons/angle-icon.svg" alt="icon">
       </button>
     `);
@@ -34,25 +34,19 @@ export default class RibbonMenu {
       let scrollLeft = ribbonInner.scrollLeft;
       let clientWidth = ribbonInner.clientWidth;
       let scrollRight = scrollWidth - scrollLeft - clientWidth;
-      console.log("scrollWidth: " + scrollWidth);
-      console.log("scrollLeft: " + scrollLeft);
-      console.log("clientWidth: " + clientWidth);
-      console.log("scrollRight: " + scrollRight);
       if (scrollRight === 0) {
-        console.log("правый: " + scrollRight);
-        arrowRight.classList.add("ribbon__arrow_visible");
-        arrowLeft.classList.remove("ribbon__arrow_visible");
+        arrowLeft.classList.add("ribbon__arrow_visible");
+        arrowRight.classList.remove("ribbon__arrow_visible");
       }
       if (scrollLeft === 0) {
-        console.log("левый: " + scrollLeft);
-        arrowRight.classList.remove("ribbon__arrow_visible");
-        arrowLeft.classList.add("ribbon__arrow_visible");
-      }
-      if (scrollLeft > 0) {
+        arrowLeft.classList.remove("ribbon__arrow_visible");
         arrowRight.classList.add("ribbon__arrow_visible");
       }
-      if (scrollRight > 0) {
+      if (scrollLeft > 0) {
         arrowLeft.classList.add("ribbon__arrow_visible");
+      }
+      if (scrollRight > 0) {
+        arrowRight.classList.add("ribbon__arrow_visible");
       }
     });
     return ribbon;
@@ -63,10 +57,10 @@ export default class RibbonMenu {
 
     if (ev.closest("button")) {
       if (ev.closest("button").classList.contains("ribbon__arrow_left")) {
-        ribbonInner.scrollBy(350, 0);
+        ribbonInner.scrollBy(-350, 0);
       }
       if (ev.closest("button").classList.contains("ribbon__arrow_right")) {
-        ribbonInner.scrollBy(-350, 0);
+        ribbonInner.scrollBy(350, 0);
       }
     }
     if (ev.tagName === "A") {
