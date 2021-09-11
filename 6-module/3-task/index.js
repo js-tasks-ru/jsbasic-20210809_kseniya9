@@ -85,7 +85,6 @@ export default class Carousel {
         bubbles: true,
       });
       ev.closest(".carousel__button").dispatchEvent(productAdd);
-      console.log(productAdd.detail);
     }
   };
 }
